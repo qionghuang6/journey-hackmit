@@ -5,12 +5,13 @@ import Box from '@mui/material/Box';
 import Link from '../src/Link';
 import Copyright from '../src/Copyright';
 import Adventure from '../src/adventure/Adventure';
+import getApiUrl from '../src/getApiUrl';
 
 export default function Index() {
   const [user, setUser] = useState(null)
   useEffect(() => {
     const getUser = async () => {
-      const res = await fetch('/api/user')
+      const res = await fetch(getApiUrl('/user'))
       const user = await res.json()
       setUser(user)
     }
