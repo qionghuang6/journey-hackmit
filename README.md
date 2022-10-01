@@ -4,6 +4,10 @@
 
 Clone this repo
 
+Add backend url to .env
+`cd` into the repo
+Paste `NEXT_PUBLIC_API_URL=http://localhost:3001` into `.env`
+
 ```sh
 yarn
 yarn dev
