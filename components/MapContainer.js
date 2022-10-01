@@ -20,8 +20,8 @@ class MapContainer extends Component{
         return (
             <div style={{
             position: "relative",
-            width: "50%",
-            height: "1100px"}} 
+            width: "100%",
+            height: "100vh"}} 
             className="map">
             <Map google={this.props.google} 
             zoom={13}
