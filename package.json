@@ -17,10 +17,12 @@
     "@emotion/styled": "latest",
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
+    "google-maps-react": "^2.0.6",
     "next": "latest",
     "prop-types": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-google-maps": "^9.4.5"
   },
   "devDependencies": {
     "eslint": "latest",

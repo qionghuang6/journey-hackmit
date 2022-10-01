@@ -6,6 +6,7 @@ import Link from '../src/Link';
 import Copyright from '../src/Copyright';
 import Adventure from '../src/adventure/Adventure';
 import getApiUrl from '../src/getApiUrl';
+import MapContainer from '../components/MapContainer';
 
 export default function Index() {
   const [user, setUser] = useState(null)
@@ -20,6 +21,7 @@ export default function Index() {
   return (
     <Container maxWidth="lg">
       <Box sx={{ my: 4 }}>
+        <MapContainer/>
         <Typography align="center" variant="h4" component="h1" gutterBottom>
           Journey
         </Typography>
