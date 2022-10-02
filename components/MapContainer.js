@@ -5,6 +5,7 @@ import getApiUrl from "../src/getApiUrl";
 import Story from "../components/Story";
 import Dialog from "@mui/material/Dialog";
 import getDistance from "../src/getDistance";
+import NavBar from "./NavBar";
 function MapContainer(props) {
   const [myMarkers, setMyMarkers] = useState([]);
   const [openStory, setOpenStory] = useState(false);
@@ -19,13 +20,17 @@ function MapContainer(props) {
       updateTimer(updateTime);
     }
   }, updateTime * 1000);
-  const [ongoingAdventure, setOngoingAdventure] = useState(false);
+  const [ongoingAdventure, setOngoingAdventure] = useState(
+    props.ongoingAdventure
+  );
   const [userRoute, updateUserRoute] = useState([props.userLocation]);
   const [adventureId, setAdventureId] = useState();
   const [lastExperienceLocation, setLastExperienceLocation] = useState(
     props.userLocation
   );
-  const [lastExperienceTime, setLastExperienceTime] = useState(Date.now());
+  const [lastExperienceTime, setLastExperienceTime] = useState(
+    Date.now() / 1000
+  );
 
   useEffect(() => {
     const body = {
@@ -117,7 +122,7 @@ function MapContainer(props) {
       />
     );
   }
-  
+
   function handleAdventureStart() {
     const getAdventureId = async () => {
       const res = await fetch(getApiUrl(`/api/adventures/generate`), {
@@ -145,7 +150,7 @@ function MapContainer(props) {
     const journeyBody = {
       parent: adventureId,
       distance: getDistance(userLocation, lastExperienceLocation),
-      time: (Date.now() - lastExperienceTime).seconds(),
+      time: Date.now() / 1000 - lastExperienceTime,
       pictures: journeyPictures,
     };
     const postJourney = async () => {
@@ -240,6 +245,11 @@ function MapContainer(props) {
         {displayMarkers()}
         {displayUserMarker()}
       </Map>
+      <NavBar
+        ongoingAdventure={ongoingAdventure}
+        handleExperienceSubmission={handleExperienceSubmission}
+        handleAdventureStart={handleAdventureStart}
+      />
     </div>
   );
 }

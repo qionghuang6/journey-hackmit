@@ -1,9 +1,9 @@
 // Expects two geolocation points
 export default function getDistance(pointOne, pointTwo) {
-  lon1 = (pointOne.lon * Math.PI) / 180;
-  lon2 = (pointTwo.lon * Math.PI) / 180;
-  lat1 = (pointOne.lat * Math.PI) / 180;
-  lat2 = (pointTwo.lat * Math.PI) / 180;
+  const lon1 = (pointOne.lon * Math.PI) / 180;
+  const lon2 = (pointTwo.lon * Math.PI) / 180;
+  const lat1 = (pointOne.lat * Math.PI) / 180;
+  const lat2 = (pointTwo.lat * Math.PI) / 180;
 
   // Haversine formula
   let dlon = lon2 - lon1;
