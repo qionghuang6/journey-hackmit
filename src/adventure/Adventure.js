@@ -25,7 +25,7 @@ export default function Adventure({a}) {
   useEffect(() => {
     const interval = setInterval(() => {
       setLiked(!liked)
-    }, 2000)
+    }, 4000)
     return () => clearInterval(interval)
   }, [liked])
 
