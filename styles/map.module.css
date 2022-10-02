@@ -91,7 +91,10 @@
   width: 100%;
   z-index: 1000;
 }
-
+.FilterContainer {
+    position: absolute;
+    top: 50px;
+}
 .NavBarBar {
   height: 100%;
   background-color: white;
@@ -127,6 +130,44 @@
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
   text-decoration: none;
+}
+
+.FilterContainer {
+    position: absolute;
+    top: 50px;
+    width: 100%;
+}
+.FilterBox {
+    margin: auto;
+    width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: white;
+    padding:10px;
+    border-radius: 10px;
+    color: #716c64;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transition: 0.7s;
+}
+.FilterBox:hover {
+    scale:110%;
+    cursor: pointer;
+}
+
+.SubmitButton {
+    padding: 10px;
+    background-color: rgb(168, 123, 123);
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-weight:300;
+    color: white;
+    transition: 0.7s;
+
+}
+.SubmitButton:hover {
+    cursor:pointer;
+    background-color: #9fb9a6;
 }
 @media only screen and (max-width: 600px) {
   .NavBarBar {
