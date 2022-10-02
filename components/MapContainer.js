@@ -1,16 +1,26 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import mapStyles from "../src/mapStyles";
 import getApiUrl from "../src/getApiUrl";
 import Story from "../components/Story";
+
+import styles from "../styles/map.module.css";
 import Dialog from "@mui/material/Dialog";
+import FormControl from '@mui/material/FormControl';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
+import Box from '@mui/material/Box';
 import getDistance from "../src/getDistance";
 import NavBar from "./NavBar";
 import AdventureNavBar from "./AdventureNavBar";
 import JourneySubmissionForm from "./JourneySubmissionForm";
 function MapContainer(props) {
+  const [friends, setFriends] = useState([]);
+  const [radius, setRadius] = useState(null);
+  const [tags, setTags] = useState([])
   const [myMarkers, setMyMarkers] = useState([]);
   const [openStory, setOpenStory] = useState(false);
+  const [openFilter, setOpenFilter] = useState(false);
   const [userLocation, setUserLocation] = useState(props.userLocation);
   const updateTime = 5;
   const [locationTimer, updateTimer] = useState(updateTime);
@@ -32,6 +42,14 @@ function MapContainer(props) {
     Date.now() / 1000
   );
 
+  const getExperiences = async (query) => {
+    const res = await fetch(
+      getApiUrl(`/api/experiences/radar?${new URLSearchParams(query)}`),
+      { method: "GET" }
+    );
+    const result = await res.json();
+    setMyMarkers(Array.from(new Set(result.experiences)));
+  };
   useEffect(() => {
     const body = {
       name: "eating",
@@ -60,16 +78,9 @@ function MapContainer(props) {
       latitude: 40.79,
       tag: "restaurant",
     };
-    const getExperiences = async () => {
-      const res = await fetch(
-        getApiUrl(`/api/experiences/radar?${new URLSearchParams(query)}`),
-        { method: "GET" }
-      );
-      const result = await res.json();
-      setMyMarkers(Array.from(new Set(result.experiences)));
-    };
-    postExperience();
-    getExperiences();
+    
+    // postExperience();
+    getExperiences(query);
   }, []);
 
   function updateUserLocation() {
@@ -248,6 +259,39 @@ function MapContainer(props) {
   function handleClose() {
     setOpenStory(false);
   }
+  function handleCloseFilter() {
+    setOpenFilter(false);
+  }
+
+  function handleFriendsChange(friends) {
+    let friendList = friends.split(',')
+    for (let i = 0; i < friendList.length; i ++) {
+        friendList[i] = friendList[i].trim();
+    }
+    setFriends(friendList);
+  }
+  function handleTagsChange(tags) {
+    let tagList = tags.split(',')
+    for (let i = 0; i < tagList.length; i ++) {
+        tagList[i] = tagList[i].trim();
+    }
+    setTags(tagList);
+  }
+  function handleRadiusChange(radius) {
+    setRadius(parseFloat(radius))
+  }
+  function handleSubmit() {
+    let filterQuery = {
+        users: friends,
+        latitude: userLocation.lat,
+        longitude: userLocation.lng,
+        radius: radius,
+        tag: tags,
+      };
+    getExperiences(filterQuery);
+    setOpenFilter(false);
+
+  }
   return (
     <div
       style={{
@@ -276,9 +320,27 @@ function MapContainer(props) {
         <Dialog onClose={handleClose} open={openStory}>
           <Story props={openStory}></Story>
         </Dialog>
+        <Dialog onClose={handleCloseFilter} open={openFilter}>
+        <FormControl>
+      <Box component="form" noValidate autoComplete="off">
+      <FormControl sx={{ width: '30ch' }}>
+        <OutlinedInput placeholder="Friends (comma separated list)" onChange={(e)=>handleFriendsChange(e.target.value)}/>
+        <OutlinedInput placeholder="Radius" onChange={(e)=>handleRadiusChange(e.target.value)}/>
+        <OutlinedInput placeholder="Tags (comma separated list)" onChange={(e)=>handleTagsChange(e.target.value)}/>
+      </FormControl>
+      <div className={styles.SubmitButton} onClick={()=>handleSubmit()}>Submit</div>
+    </Box>
+</FormControl> 
+        </Dialog>
         {displayMarkers()}
         {displayUserMarker()}
       </Map>
+      <div className={styles.FilterContainer}>
+      <div className={styles.FilterBox} onClick={()=>setOpenFilter(true)}>
+      <FilterListRoundedIcon/>
+      <div style={{paddingLeft: '10px'}}>Filter By</div>
+      </div>
+      </div>
       <NavBar
         ongoingAdventure={ongoingAdventure}
         handleExperienceSubmission={handleExperienceSubmission}
@@ -290,3 +352,11 @@ function MapContainer(props) {
 export default GoogleApiWrapper({
   apiKey: "AIzaSyCdEKu3k2avk5Y5Ru2EGSGzyyrAm2UcLpU",
 })(MapContainer);
+
+{/* <FormControl>
+      <Box component="form" noValidate autoComplete="off">
+      <FormControl sx={{ width: '25ch' }}>
+        <OutlinedInput placeholder="Please enter text" />
+      </FormControl>
+    </Box>
+</FormControl> */}
