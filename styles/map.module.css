@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600;800&display=swap');
+
+.StoryAuthor {
+    font-size: 18px;
+}
+
+.StoryTitle {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 70px;
+}
+
+.StoryContainer {
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-weight:300;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: '100%';
+    padding: 16px;
+    text-transform: uppercase;
+    font-size: 24px;
+
+letter-spacing: 0.1em;
+
+    background: linear-gradient(-45deg, #6c664e, #68b07b, #416597);
+  background-size: 400% 400%;
+  animation: gradient 5s ease infinite;
+  }
+  
+  @keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+  }
+
+.StoryPhoto {
+    /* border-radius: 50%; */
+    border-radius: 20px;
+    padding: 16px;
+    width: 300px;
+    height: 300px;
+}
+
+.StoryTag {
+    height: min-content;
+    /* width: 100px; */
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+    font-size: 10px;
+    padding:5px 10px;
+    align-items: center;
+    color: rgb(92, 78, 78);
+    background-color: rgb(222, 205, 170);
+}
+
+.StoryProfilePhoto {
+    width: 36px;
+    height: 36px;
+    margin-left: 5px;
+    border-radius: 5px;
+    align-self: flex-start;
+}
+.MapContainerMarker {
+    background-color: white;
+    padding: 10px;
+}
