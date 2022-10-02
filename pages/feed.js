@@ -48,15 +48,9 @@ export default function Index() {
           <Button sx={{ width: "100%" }} onClick={() => setView("feed")}>
             Feed
           </Button>
-          <Button
-            sx={{ width: "100%" }}
-            onClick={() => setView("bingchilling")}
-          >
-            Ice Cream
-          </Button>
-          <Button sx={{ width: "100%" }} onClick={() => setView("bas")}>
-            ???
-          </Button>
+          <Link href="/">
+            <Button sx={{ width: "100%" }}>Map</Button>
+          </Link>
           <LoginForm />
         </Box>
       )}
