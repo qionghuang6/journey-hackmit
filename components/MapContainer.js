@@ -13,6 +13,7 @@ import Box from '@mui/material/Box';
 import getDistance from "../src/getDistance";
 import NavBar from "./NavBar";
 import AdventureNavBar from "./AdventureNavBar";
+import JourneySubmissionForm from "./JourneySubmissionForm";
 function MapContainer(props) {
   const [friends, setFriends] = useState([]);
   const [radius, setRadius] = useState(null);
@@ -308,6 +309,7 @@ function MapContainer(props) {
       ) : (
         <div />
       )}
+      <JourneySubmissionForm />
       <Map
         google={props.google}
         zoom={13}
