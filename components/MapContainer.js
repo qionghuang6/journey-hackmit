@@ -355,6 +355,7 @@ function MapContainer(props) {
         </div>
       </div>
       <NavBar
+        goToFeed={props.goToFeed}
         ongoingAdventure={ongoingAdventure}
         handleExperienceSubmission={handleExperienceSubmission}
         handleAdventureStart={handleAdventureStart}

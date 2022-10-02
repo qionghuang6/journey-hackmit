@@ -7,15 +7,18 @@ import StarIcon from '@mui/icons-material/Star';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 
 const ExperienceJourneyGroup = ({eStyle, jStyle}) => {
+  const x = ['experience.jpeg', 'journey.jpeg', '0.png', '1.png', '2.png', '3.png']
+  const a = x[Math.floor(Math.random() * x.length)];
+  const b = x[Math.floor(Math.random() * x.length)];
   return (
     <Box sx={{position: 'relative', width: '100%', height: 200}}>
-      <img src="experience.jpeg" style={{cursor: 'pointer', position: 'absolute', zIndex: '1', objectFit: 'contain', top: '0%', width: '70%', height: 'same-as-width', borderRadius: '16px', ...eStyle,}}/>
-      <img src="journey.jpeg" style={{cursor: 'pointer', position: 'absolute', objectFit: 'contain', margin: 'auto', top: '25%', left: '60%', width: '60%', height: 'same-as-width', borderRadius: '16px', ...jStyle}}/>
+      <img src={a} style={{cursor: 'pointer', position: 'absolute', zIndex: '1', objectFit: 'contain', top: '0%', width: '70%', height: 'same-as-width', borderRadius: '16px', ...eStyle,}}/>
+      <img src={b} style={{cursor: 'pointer', position: 'absolute', objectFit: 'contain', margin: 'auto', top: '25%', left: '60%', width: '60%', height: 'same-as-width', borderRadius: '16px', ...jStyle}}/>
     </Box>
   )
 }
 
-export default function Adventure() {
+export default function Adventure({a}) {
   const profileImgUrl = '/phil.jpeg'
   const [liked, setLiked] = useState(false)
 
@@ -26,11 +29,11 @@ export default function Adventure() {
     return () => clearInterval(interval)
   }, [liked])
 
-  const name = 'Adventure Name Here'
-  const timestamp = new Date('2021-09-01T04:23:00')
-  const likeCount = 6293
-  const caption = `this place was lowkey kinda mid. i used my boosted board to get here and i just got soup.`
-  const stars = 3
+  const name = 'washington d.C!'
+  const timestamp = a ? new Date('2021-09-01T04:23:00') : new Date('2022-05-02T03:32:00')
+  const likeCount = a ? 6293 : 121
+  const caption = a ? `this place was lowkey kinda mid. i used my boosted board to get here and i just got soup.` : 'nice!'
+  const stars = a ? 3 : 5
 
   const handleLikeClick = () => {
     setLiked(!liked)
