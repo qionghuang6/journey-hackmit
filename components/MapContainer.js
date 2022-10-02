@@ -7,6 +7,7 @@ import Dialog from "@mui/material/Dialog";
 import getDistance from "../src/getDistance";
 import NavBar from "./NavBar";
 import AdventureNavBar from "./AdventureNavBar";
+import JourneySubmissionForm from "./JourneySubmissionForm";
 function MapContainer(props) {
   const [myMarkers, setMyMarkers] = useState([]);
   const [openStory, setOpenStory] = useState(false);
@@ -264,6 +265,7 @@ function MapContainer(props) {
       ) : (
         <div />
       )}
+      <JourneySubmissionForm />
       <Map
         google={props.google}
         zoom={13}
