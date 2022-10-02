@@ -24,11 +24,11 @@ export default function Story(props) {
         <>
         <div className={styles.StoryContainer}>
 
-        
         {/* <div className={styles.StoryAuthor}>
             {props.props.parent}
         </div> */}
         <div className={styles.StoryTitle}>
+
         <div><img src={"./phil.jpeg"} className={styles.StoryProfilePhoto}></img></div>
             <div>{props.props.name}</div>
             </div>
