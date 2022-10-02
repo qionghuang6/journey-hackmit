@@ -6,6 +6,7 @@ import Story from "../components/Story";
 import Dialog from "@mui/material/Dialog";
 import getDistance from "../src/getDistance";
 import NavBar from "./NavBar";
+import AdventureNavBar from "./AdventureNavBar";
 function MapContainer(props) {
   const [myMarkers, setMyMarkers] = useState([]);
   const [openStory, setOpenStory] = useState(false);
@@ -127,8 +128,11 @@ function MapContainer(props) {
         method: "GET",
       });
       const result = await res.json();
-      await setAdventureId(result.id);
-      await setOngoingAdventure(true);
+      setAdventureId(result.id);
+      setOngoingAdventure(true);
+      setLastExperienceLocation(userLocation);
+      updateUserRoute([userLocation]);
+      setLastExperienceTime(Date.now());
     };
     getAdventureId();
   }
@@ -150,11 +154,11 @@ function MapContainer(props) {
         },
         body: JSON.stringify(body),
       });
-      await setOngoingAdventure(false);
-      await setAdventureId(null);
-      await updateUserRoute(null);
-      await setLastExperienceLocation(null);
-      await setLastExperienceTime(null);
+      setOngoingAdventure(false);
+      setAdventureId(null);
+      updateUserRoute(null);
+      setLastExperienceLocation(null);
+      setLastExperienceTime(null);
     };
     postAdventure();
   }
@@ -252,6 +256,14 @@ function MapContainer(props) {
       }}
       className="map"
     >
+      {ongoingAdventure ? (
+        <AdventureNavBar
+          distance={getDistance(userLocation, lastExperienceLocation)}
+          time={Date.now - lastExperienceTime}
+        />
+      ) : (
+        <div />
+      )}
       <Map
         google={props.google}
         zoom={13}

@@ -1,38 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600;800&display=swap");
 
 .StoryAuthor {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .StoryTitle {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    gap: 70px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 70px;
 }
 
 .StoryContainer {
-    color: white;
-    font-family: 'Open Sans', sans-serif;
-    font-weight:300;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: '100%';
-    padding: 16px;
-    text-transform: uppercase;
-    font-size: 24px;
+  color: white;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: "100%";
+  padding: 16px;
+  text-transform: uppercase;
+  font-size: 24px;
 
-letter-spacing: 0.1em;
+  letter-spacing: 0.1em;
 
-    background: linear-gradient(-45deg, #6c664e, #68b07b, #416597);
+  background: linear-gradient(-45deg, #6c664e, #68b07b, #416597);
   background-size: 400% 400%;
   animation: gradient 5s ease infinite;
-  }
-  
-  @keyframes gradient {
+}
+
+@keyframes gradient {
   0% {
     background-position: 0% 50%;
   }
@@ -42,86 +42,94 @@ letter-spacing: 0.1em;
   100% {
     background-position: 0% 50%;
   }
-  }
+}
 
 .StoryPhoto {
-    /* border-radius: 50%; */
-    border-radius: 20px;
-    padding: 16px;
-    width: 300px;
-    height: 300px;
+  /* border-radius: 50%; */
+  border-radius: 20px;
+  padding: 16px;
+  width: 300px;
+  height: 300px;
 }
 
 .StoryTag {
-    height: min-content;
-    /* width: 100px; */
-    display: flex;
-    justify-content: center;
-    border-radius: 20px;
-    font-size: 10px;
-    padding:5px 10px;
-    align-items: center;
-    color: rgb(92, 78, 78);
-    background-color: rgb(222, 205, 170);
+  height: min-content;
+  /* width: 100px; */
+  display: flex;
+  justify-content: center;
+  border-radius: 20px;
+  font-size: 10px;
+  padding: 5px 10px;
+  align-items: center;
+  color: rgb(92, 78, 78);
+  background-color: rgb(222, 205, 170);
 }
 
 .StoryProfilePhoto {
-    width: 36px;
-    height: 36px;
-    margin-left: 5px;
-    border-radius: 5px;
-    align-self: flex-start;
+  width: 36px;
+  height: 36px;
+  margin-left: 5px;
+  border-radius: 5px;
+  align-self: flex-start;
 }
 .MapContainerMarker {
-    background-color: white;
-    padding: 10px;
+  background-color: white;
+  padding: 10px;
 }
 
 .NavBarContainer {
-    position: absolute;
-    bottom: 50px;
-    height: 70px;
-    width: 100%;
+  position: absolute;
+  bottom: 50px;
+  height: 70px;
+  width: 100%;
+}
 
+.AdventureNavBarContainer {
+  position: absolute;
+  top: 50px;
+  height: 70px;
+  width: 100%;
+  z-index: 1000;
 }
 
 .NavBarBar {
-    height: 100%;
-    background-color: white;
-    margin: auto;
-    width: 50%;
-    border-radius: 10px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-
+  height: 100%;
+  background-color: white;
+  margin: auto;
+  width: 50%;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
-.PostAddIcon, .PostPlayIcon, .PostIcon {
-
+.PostAddIcon,
+.PostPlayIcon,
+.PostIcon {
   transition: 0.7s;
 }
-.PostAddIcon:hover, .PostPlayIcon:hover{
-    cursor: pointer;
-    font-size: 50px;
+.PostAddIcon:hover,
+.PostPlayIcon:hover {
+  cursor: pointer;
+  font-size: 50px;
 }
 
 .PostIcon {
-    color:#827f7b;
+  color: #827f7b;
 }
 .PostIcon:hover {
-    font-size: 30px;
-    cursor: pointer;
-    color: #716c64;
+  font-size: 30px;
+  cursor: pointer;
+  color: #716c64;
 }
 .Link {
-    font-family: 'Open Sans', sans-serif;
-    font-weight:300;
-    text-decoration: none;;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  text-decoration: none;
 }
 @media only screen and (max-width: 600px) {
-    .NavBarBar {
-        width: 300px;
-    }
+  .NavBarBar {
+    width: 300px;
+  }
 }
