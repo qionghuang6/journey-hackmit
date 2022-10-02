@@ -5,6 +5,8 @@ import Link from '../src/Link';
 import Copyright from '../src/Copyright';
 import Adventure from '../src/adventure/Adventure';
 import getApiUrl from '../src/getApiUrl';
+import { Login } from '@mui/icons-material';
+import {LoginForm} from './login';
 
 export default function Index() {
   const [user, setUser] = useState(null)
@@ -31,6 +33,7 @@ export default function Index() {
         <Button sx={{width: '100%'}} onClick={() => setView('feed')}>Feed</Button>
         <Button sx={{width: '100%'}} onClick={() => setView('bingchilling')}>Ice Cream</Button>
         <Button sx={{width: '100%'}} onClick={() => setView('bas')}>???</Button>
+        <LoginForm/>
       </Box> }
       {view == 'feed' ? (
         <div style={{width: '100%', backgroundImage: 'url("/map.jpg")', marginTop: '-3rem'}}>
