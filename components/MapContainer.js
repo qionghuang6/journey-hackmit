@@ -4,19 +4,28 @@ import mapStyles from "../src/mapStyles";
 import getApiUrl from "../src/getApiUrl";
 import Story from "../components/Story";
 import Dialog from "@mui/material/Dialog";
+import getDistance from "../src/getDistance";
 function MapContainer(props) {
   const [myMarkers, setMyMarkers] = useState([]);
   const [openStory, setOpenStory] = useState(false);
   const [userLocation, setUserLocation] = useState(props.userLocation);
-  const [locationTimer, updateTimer] = useState(5);
+  const updateTime = 5;
+  const [locationTimer, updateTimer] = useState(updateTime);
   let timer = setTimeout(function () {
     if (locationTimer > 0) {
-      updateTimer(locationTimer - 1);
+      updateTimer(locationTimer - updateTime);
     } else {
       updateUserLocation();
-      updateTimer(5);
+      updateTimer(updateTime);
     }
-  }, 1000);
+  }, updateTime * 1000);
+  const [ongoingAdventure, setOngoingAdventure] = useState(false);
+  const [userRoute, updateUserRoute] = useState([props.userLocation]);
+  const [adventureId, setAdventureId] = useState();
+  const [lastExperienceLocation, setLastExperienceLocation] = useState(
+    props.userLocation
+  );
+  const [lastExperienceTime, setLastExperienceTime] = useState(Date.now());
 
   useEffect(() => {
     const body = {
@@ -68,8 +77,12 @@ function MapContainer(props) {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude,
               };
-              console.log("User location found map container", pos);
+              console.log("Updated user location");
               await setUserLocation(pos);
+              if (ongoingAdventure) {
+                await updateUserRoute((current) => [...current, pos]);
+                console.log("User routes", userRoute);
+              }
             },
             () => {
               console.error("Error getting user location");
@@ -84,7 +97,6 @@ function MapContainer(props) {
         console.log("set user location", userLocation);
       }
       getPos();
-      //locationTimer = setTimeout(updateUserLocation(), 5000);
     } catch (e) {
       console.error("Error getting user location: ", e);
     }
@@ -98,12 +110,79 @@ function MapContainer(props) {
           icon: {
             url: "./user_icon.png",
             borderRadius: "50%",
-            scaledSize: { width: 32, height: 32 },
+            scaledSize: { width: 24, height: 24 },
           },
         }}
         position={userLocation}
       />
     );
+  }
+
+  function handleAdventureStart() {
+    const getAdventureId = async () => {
+      const res = await fetch(getApiUrl(`/api/adventures/generate`), {
+        method: "GET",
+      });
+      const result = await res.json();
+      await setAdventureId(result.id);
+      await setOngoingAdventure(true);
+    };
+    getAdventureId();
+  }
+
+  function handleAdventureSubmission() {
+    // POST request to add an adventure after filling out a form as well
+  }
+
+  function handleExperienceSubmission(
+    name,
+    rating,
+    tag,
+    experiencePictures,
+    journeyPictures
+  ) {
+    // A new experience means the end to the previous journey
+    const journeyBody = {
+      parent: adventureId,
+      distance: getDistance(userLocation, lastExperienceLocation),
+      time: (Date.now() - lastExperienceTime).seconds(),
+      pictures: journeyPictures,
+    };
+    const postJourney = async () => {
+      const res = await fetch(getApiUrl(`/api/journeys/add`), {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(journeyBody),
+      });
+      await setLastExperienceLocation(userLocation);
+    };
+    // POST request to add an experience after pressing the plus button while in an ongoing adventure and filling out a form
+    const experienceBody = {
+      name: name,
+      latitude: userLocation.lat,
+      longitude: userLocation.lng,
+      parent: adventureId,
+      rating: rating,
+      tag: tag,
+      pictures: experiencePictures,
+    };
+    const postExperience = async () => {
+      const res = await fetch(getApiUrl(`/api/experiences/add`), {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(experienceBody),
+      });
+      await setLastExperienceLocation(userLocation);
+      await setLastExperienceTime(Date.now());
+    };
+    postJourney();
+    postExperience();
   }
 
   //   name: name,
