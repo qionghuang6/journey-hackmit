@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import getApiUrl from '../src/getApiUrl';
 
 // Define the Login form component
 export class LoginForm extends Component {
@@ -21,9 +22,17 @@ handleInputChange(event) {
     });
   }
 
-handleSubmit(event) {
+async handleSubmit(event) {
     event.preventDefault();
-    // TODO: add API call
+    const body = { email: this.username, password: this.password};
+    const res = await fetch(
+        getApiUrl(`/api/user/login`), 
+        { method: 'POST' , headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }, body: JSON.stringify(body)}
+      )
+      console.log("RES", res)
   }
 
 render() {
