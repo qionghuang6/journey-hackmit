@@ -10,21 +10,29 @@ export default function JourneySubmissionForm(props) {
   useEffect(() => {}, []);
 
   const handleImageSubmit = (event) => {
-    if (
-      event.target.files[0].type === "image/png" ||
-      event.target.files[0].type === "image/jpg" ||
-      event.target.files[0].type === "image/jpeg"
-    ) {
-      const handleFile = (e) => {
-        const content = e.target.result;
-        updateImages((current) => [...current, content]);
-        console.log("RES", res);
-        const reader = new FileReader();
-        reader.onloadend = handleFile;
-        reader.readAsDataURL(event.target.files[0]); // Converting file into data URL
-        // You can set content in state and show it in render.
-      };
-    } else {
+    try {
+      console.log("TRIED ", event.target.files[0].type);
+      if (
+        event.target.files[0].type === "image/png" ||
+        event.target.files[0].type === "image/jpg" ||
+        event.target.files[0].type === "image/jpeg"
+      ) {
+        const handleFile = (e) => {
+          const content = e.target.result;
+          console.log(content);
+          const reader = new FileReader();
+          reader.onloadend = handleFile;
+          console.log(event.target.files[0]);
+          reader.readAsDataURL(content); // Converting file into data URL
+          console.log(reader);
+          updateImages((current) => [...current, content]);
+          e.target.value = null;
+          // You can set content in state and show it in render.
+        };
+        handleFile(event);
+      }
+    } catch (e) {
+      console.error("Error when trying to upload image: ", e);
     }
   };
 

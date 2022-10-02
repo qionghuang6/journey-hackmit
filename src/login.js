@@ -1,6 +1,6 @@
 import { create } from '@mui/material/styles/createTransitions';
 import React, {Component} from 'react'
-import getApiUrl from '../src/getApiUrl';
+import getApiUrl from './getApiUrl';
 
 // Define the Login form component
 export class LoginForm extends Component {

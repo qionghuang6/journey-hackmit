@@ -6,10 +6,10 @@ import Story from "../components/Story";
 
 import styles from "../styles/map.module.css";
 import Dialog from "@mui/material/Dialog";
-import FormControl from '@mui/material/FormControl';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
-import Box from '@mui/material/Box';
+import FormControl from "@mui/material/FormControl";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import FilterListRoundedIcon from "@mui/icons-material/FilterListRounded";
+import Box from "@mui/material/Box";
 import getDistance from "../src/getDistance";
 import NavBar from "./NavBar";
 import AdventureNavBar from "./AdventureNavBar";
@@ -17,7 +17,7 @@ import JourneySubmissionForm from "./JourneySubmissionForm";
 function MapContainer(props) {
   const [friends, setFriends] = useState([]);
   const [radius, setRadius] = useState(null);
-  const [tags, setTags] = useState([])
+  const [tags, setTags] = useState([]);
   const [myMarkers, setMyMarkers] = useState([]);
   const [openStory, setOpenStory] = useState(false);
   const [openFilter, setOpenFilter] = useState(false);
@@ -78,7 +78,7 @@ function MapContainer(props) {
       latitude: 40.79,
       tag: "restaurant",
     };
-    
+
     // postExperience();
     getExperiences(query);
   }, []);
@@ -264,33 +264,32 @@ function MapContainer(props) {
   }
 
   function handleFriendsChange(friends) {
-    let friendList = friends.split(',')
-    for (let i = 0; i < friendList.length; i ++) {
-        friendList[i] = friendList[i].trim();
+    let friendList = friends.split(",");
+    for (let i = 0; i < friendList.length; i++) {
+      friendList[i] = friendList[i].trim();
     }
     setFriends(friendList);
   }
   function handleTagsChange(tags) {
-    let tagList = tags.split(',')
-    for (let i = 0; i < tagList.length; i ++) {
-        tagList[i] = tagList[i].trim();
+    let tagList = tags.split(",");
+    for (let i = 0; i < tagList.length; i++) {
+      tagList[i] = tagList[i].trim();
     }
     setTags(tagList);
   }
   function handleRadiusChange(radius) {
-    setRadius(parseFloat(radius))
+    setRadius(parseFloat(radius));
   }
   function handleSubmit() {
     let filterQuery = {
-        users: friends,
-        latitude: userLocation.lat,
-        longitude: userLocation.lng,
-        radius: radius,
-        tag: tags,
-      };
+      users: friends,
+      latitude: userLocation.lat,
+      longitude: userLocation.lng,
+      radius: radius,
+      tag: tags,
+    };
     getExperiences(filterQuery);
     setOpenFilter(false);
-
   }
   return (
     <div
@@ -322,25 +321,39 @@ function MapContainer(props) {
           <Story props={openStory}></Story>
         </Dialog>
         <Dialog onClose={handleCloseFilter} open={openFilter}>
-        <FormControl>
-      <Box component="form" noValidate autoComplete="off">
-      <FormControl sx={{ width: '30ch' }}>
-        <OutlinedInput placeholder="Friends (comma separated list)" onChange={(e)=>handleFriendsChange(e.target.value)}/>
-        <OutlinedInput placeholder="Radius" onChange={(e)=>handleRadiusChange(e.target.value)}/>
-        <OutlinedInput placeholder="Tags (comma separated list)" onChange={(e)=>handleTagsChange(e.target.value)}/>
-      </FormControl>
-      <div className={styles.SubmitButton} onClick={()=>handleSubmit()}>Submit</div>
-    </Box>
-</FormControl> 
+          <FormControl>
+            <Box component="form" noValidate autoComplete="off">
+              <FormControl sx={{ width: "30ch" }}>
+                <OutlinedInput
+                  placeholder="Friends (comma separated list)"
+                  onChange={(e) => handleFriendsChange(e.target.value)}
+                />
+                <OutlinedInput
+                  placeholder="Radius"
+                  onChange={(e) => handleRadiusChange(e.target.value)}
+                />
+                <OutlinedInput
+                  placeholder="Tags (comma separated list)"
+                  onChange={(e) => handleTagsChange(e.target.value)}
+                />
+              </FormControl>
+              <div
+                className={styles.SubmitButton}
+                onClick={() => handleSubmit()}
+              >
+                Submit
+              </div>
+            </Box>
+          </FormControl>
         </Dialog>
         {displayMarkers()}
         {displayUserMarker()}
       </Map>
       <div className={styles.FilterContainer}>
-      <div className={styles.FilterBox} onClick={()=>setOpenFilter(true)}>
-      <FilterListRoundedIcon/>
-      <div style={{paddingLeft: '10px'}}>Filter By</div>
-      </div>
+        <div className={styles.FilterBox} onClick={() => setOpenFilter(true)}>
+          <FilterListRoundedIcon />
+          <div style={{ paddingLeft: "10px" }}>Filter By</div>
+        </div>
       </div>
       <NavBar
         ongoingAdventure={ongoingAdventure}
@@ -354,10 +367,12 @@ export default GoogleApiWrapper({
   apiKey: "AIzaSyCdEKu3k2avk5Y5Ru2EGSGzyyrAm2UcLpU",
 })(MapContainer);
 
-{/* <FormControl>
+{
+  /* <FormControl>
       <Box component="form" noValidate autoComplete="off">
       <FormControl sx={{ width: '25ch' }}>
         <OutlinedInput placeholder="Please enter text" />
       </FormControl>
     </Box>
-</FormControl> */}
+</FormControl> */
+}

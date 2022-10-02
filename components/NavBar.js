@@ -24,11 +24,11 @@ export default function NavBar(props) {
   return (
     <div className={styles.NavBarContainer}>
       <div className={styles.NavBarBar}>
-        <Link href="/map">
+        <Link href="/feed">
           <MapRoundedIcon className={styles.PostIcon} />
           {/* <a className={styles.Link}>MAP</a> */}
         </Link>
-        <Link href="/profile">
+        <Link href="/feed">
           <AccountCircleRoundedIcon className={styles.PostIcon} />
           {/* <a className={styles.Link}>PROFILE</a> */}
         </Link>
@@ -61,7 +61,7 @@ export default function NavBar(props) {
           <ChatBubbleRoundedIcon className={styles.PostIcon} />
           {/* <a className={styles.Link}>FEED</a> */}
         </Link>
-        <Link href="/settings">
+        <Link href="/feed">
           <SettingsRoundedIcon className={styles.PostIcon} />
           {/* <a className={styles.Link}>SETTINGS</a> */}
         </Link>
