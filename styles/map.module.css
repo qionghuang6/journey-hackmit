@@ -95,6 +95,15 @@
     position: absolute;
     top: 50px;
 }
+.centerIcon, .center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+.centerIcon:hover {
+    cursor:pointer;
+}
 .NavBarBar {
   height: 100%;
   background-color: white;
@@ -106,6 +115,21 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+}
+.AdventureNavBarBar {
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  margin: auto;
+  width: 50%;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  display: flex;
+  padding: 10px;
 }
 .PostAddIcon,
 .PostPlayIcon,
@@ -169,8 +193,18 @@
     cursor:pointer;
     background-color: #9fb9a6;
 }
+
+.AdventureNavBarText {
+    font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  text-align: center;
+}
 @media only screen and (max-width: 600px) {
   .NavBarBar {
     width: 300px;
+  }
+  .AdventureNavBarContainer {
+    font-size: 12px;
+    height:200px;
   }
 }

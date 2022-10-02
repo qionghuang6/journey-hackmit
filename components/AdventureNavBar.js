@@ -3,13 +3,15 @@ import Link from "next/link";
 import styles from "../styles/map.module.css";
 import StopIcon from "@mui/icons-material/Stop";
 
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+
 export default function AdventureNavBar(props) {
   // the stop icon is supposed to go in the middle
   return (
     <div className={styles.AdventureNavBarContainer}>
-      <div className={styles.NavBarBar}>
+      <div className={styles.AdventureNavBarBar}>
         {props.distance && props.time ? (
-          <div>
+          <div className={styles.AdventureNavBarText}> 
             <h4>Distance Traveled: {props.distance} mi</h4>
             <h4>Time Elapsed: {props.time / 60000} minutes</h4>
             <div>
@@ -17,24 +19,27 @@ export default function AdventureNavBar(props) {
             </div>
           </div>
         ) : (
-          <div>
-            <h3>
-              Adventure started! Click the plus button to add an experience!
-            </h3>
+          <div className={styles.AdventureNavBarText}>
+            <div className={styles.center}>Adventure started! Click <AddCircleIcon
+                sx={{ color: "rgb(222, 205, 170)", paddingLeft: '5px', paddingRight: '5px', fontSize: 30 }}/> to add an experience! Click</div>
+                <div ><div
+                className={styles.centerIcon}
+                onClick={() => {
+                  props.handleAdventureSubmission();
+                }}
+              >
+                <StopIcon
+              // className={styles.PostAddIcon}
+              sx={{ color: "rgb(222, 205, 170)", fontSize: 40 }}
+            /></div>
+            to pause.
+          </div>
           </div>
         )}
 
-        <StopIcon
-          className={styles.PostAddIcon}
-          sx={{ color: "rgb(222, 205, 170)", fontSize: 40 }}
-        />
+        
 
-        <div
-          className={styles.PostPlay}
-          onClick={() => {
-            props.handleAdventureSubmission();
-          }}
-        ></div>
+        
       </div>
     </div>
   );
