@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "@emotion/cache": "latest",
-    "@emotion/react": "latest",
+    "@emotion/react": "^11.10.4",
     "@emotion/server": "latest",
-    "@emotion/styled": "latest",
+    "@emotion/styled": "^11.10.4",
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
     "google-maps-react": "^2.0.6",
@@ -22,7 +22,8 @@
     "prop-types": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "react-google-maps": "^9.4.5"
+    "react-google-maps": "^9.4.5",
+    "styles": "^0.2.1"
   },
   "devDependencies": {
     "eslint": "latest",
