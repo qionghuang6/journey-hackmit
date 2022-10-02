@@ -1,6 +1,23 @@
-# Next.js example
+# JRNY.io
+## https://journey-one.vercel.app/
 
-## How to use
+Journey is an app that allows users to share with the world their adventures in a new and reimagined way. Users post not just their experiences, but also the journey there – giving their friends an immersive, complete view of the ultimate adventure. A sleek map interface allows users to view nearby adventures, read reviews and interact with others in search of exciting new journeys to undertake.
+
+## Backend Repository
+https://github.com/qionghuang6/journey-backend
+### Deployed on https://journeyhack-api.herokuapp.com/
+
+
+### Clone backend repo
+### Run backend:
+```
+npm install
+```
+```
+nodemon server.js
+```
+
+## How to use Frontend
 
 Clone this repo
 
@@ -12,13 +29,3 @@ Paste `NEXT_PUBLIC_API_URL=http://localhost:3001` into `.env`
 yarn
 yarn dev
 ```
-## The idea behind the example
-
-The project uses [Next.js](https://github.com/vercel/next.js), which is a framework for server-rendered React apps.
-It includes `@mui/material` and its peer dependencies, including `emotion`, the default style engine in MUI v5.
-If you prefer, you can [use styled-components instead](https://mui.com/material-ui/guides/interoperability/#styled-components).
-
-## The link component
-
-The [example folder](https://github.com/mui/material-ui/tree/HEAD/examples/nextjs-with-typescript) provides an adapter for the use of [Next.js's Link component](https://nextjs.org/docs/api-reference/next/link) with MUI.
-More information [in the documentation](https://mui.com/material-ui/guides/routing/#next-js).
