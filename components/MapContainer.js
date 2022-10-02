@@ -117,7 +117,7 @@ function MapContainer(props) {
       />
     );
   }
-
+  
   function handleAdventureStart() {
     const getAdventureId = async () => {
       const res = await fetch(getApiUrl(`/api/adventures/generate`), {

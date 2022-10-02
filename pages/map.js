@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import getApiUrl from "../src/getApiUrl";
 import MapContainer from "../components/MapContainer";
+import NavBar from '../components/NavBar';
 
 export default function Map() {
   const [userLocation, setUserLocation] = useState({ lat: 40.79, lng: -74 });
@@ -38,6 +39,7 @@ export default function Map() {
   return (
     <>
       <MapContainer userLocation={userLocation} />
+      <NavBar/>
     </>
   );
 }
