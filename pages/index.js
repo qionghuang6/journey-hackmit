@@ -6,7 +6,7 @@ import Copyright from '../src/Copyright';
 import Adventure from '../src/adventure/Adventure';
 import getApiUrl from '../src/getApiUrl';
 import { Login } from '@mui/icons-material';
-import {LoginForm} from './login';
+import {LoginForm} from '../src/login';
 
 export default function Index() {
   const [user, setUser] = useState(null)
