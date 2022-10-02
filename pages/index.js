@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Container from '@mui/material/Container';
-import { Button, Box, Typography } from '@mui/material'
+import { Button, Box, Typography, useMediaQuery} from '@mui/material'
 import Link from '../src/Link';
 import Copyright from '../src/Copyright';
 import Adventure from '../src/adventure/Adventure';
@@ -10,11 +10,13 @@ export default function Index() {
   const [user, setUser] = useState(null)
   const [view, setView] = useState('feed')
 
+  const matches = useMediaQuery('(min-width:900px)');
+
   useEffect(() => {
     const query = { user: 'test' }
     const getUser = async () => {
       const res = await fetch(
-        getApiUrl(`/user/lookup?${new URLSearchParams(query)}`), 
+        getApiUrl(`/api/user/lookup?${new URLSearchParams(query)}`), 
         { method: 'GET' }
       )
       const user = await res.json()
@@ -24,12 +26,12 @@ export default function Index() {
   }, [])
 
   return (<>
-      <Box sx={{padding: 2, paddingTop: '3rem', position: 'fixed', left: 0, width: '15vw', height: '100vh', backgroundColor: '#f3f3f3'}}>
+      {matches && <Box sx={{padding: 2, paddingTop: '3rem', position: 'fixed', left: 0, width: '200px', height: '100vh', backgroundColor: '#f3f3f3'}}>
         <Typography variant="h3"><b>JRNY.io</b></Typography>
         <Button sx={{width: '100%'}} onClick={() => setView('feed')}>Feed</Button>
         <Button sx={{width: '100%'}} onClick={() => setView('bingchilling')}>Ice Cream</Button>
         <Button sx={{width: '100%'}} onClick={() => setView('bas')}>???</Button>
-      </Box>
+      </Box> }
       {view == 'feed' ? (
         <div style={{width: '100%', backgroundImage: 'url("/map.jpg")', marginTop: '-3rem'}}>
           <Container maxWidth="sm">
