@@ -23,11 +23,9 @@ function MapContainer(props) {
   const [ongoingAdventure, setOngoingAdventure] = useState(
     props.ongoingAdventure
   );
-  const [userRoute, updateUserRoute] = useState([props.userLocation]);
+  const [userRoute, updateUserRoute] = useState([]);
   const [adventureId, setAdventureId] = useState();
-  const [lastExperienceLocation, setLastExperienceLocation] = useState(
-    props.userLocation
-  );
+  const [lastExperienceLocation, setLastExperienceLocation] = useState();
   const [lastExperienceTime, setLastExperienceTime] = useState(
     Date.now() / 1000
   );
@@ -135,8 +133,30 @@ function MapContainer(props) {
     getAdventureId();
   }
 
-  function handleAdventureSubmission() {
+  function handleAdventureSubmission(title) {
     // POST request to add an adventure after filling out a form as well
+    const body = {
+      author: props.user.name,
+      title: title,
+      route: userRoute,
+      adventureId: adventureId,
+    };
+    const postAdventure = async () => {
+      const res = await fetch(getApiUrl(`/api/adventures/add`), {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+      await setOngoingAdventure(false);
+      await setAdventureId(null);
+      await updateUserRoute(null);
+      await setLastExperienceLocation(null);
+      await setLastExperienceTime(null);
+    };
+    postAdventure();
   }
 
   function handleExperienceSubmission(
