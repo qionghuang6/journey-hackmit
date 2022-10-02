@@ -86,7 +86,7 @@
 
 .AdventureNavBarContainer {
   position: absolute;
-  top: 50px;
+  top: 140px;
   height: 70px;
   width: 100%;
   z-index: 1000;
@@ -103,6 +103,32 @@
 }
 .centerIcon:hover {
     cursor:pointer;
+}
+.Journey {
+    position:absolute;
+    bottom: 200px;
+    display: flex;
+    width:100%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+}
+.JourneyBox {
+    display: flex;
+    font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    background-color: white;
+padding: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    width: 350px;
+    border-radius: 10px;
 }
 .NavBarBar {
   height: 100%;

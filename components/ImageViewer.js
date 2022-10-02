@@ -30,7 +30,8 @@ export default function ImageViewer(props) {
   }
   console.log("image viewer images", images);
   return (
-    <div>
+    <div style={{padding:'10px'}}>
+      {images.length > 0 ?
       <ArrowCircleLeftIcon
         onClick={handleLeftClick}
         style={{
@@ -39,8 +40,9 @@ export default function ImageViewer(props) {
           zIndex: "5",
           top: "50%",
         }}
-      />
+      />:<div></div>}
       {images.length > 0 ? <img src={images[currIndex]} /> : <div />}
+      {images.length > 0 ?
       <ArrowCircleRightIcon
         onClick={handleRightClick}
         style={{
@@ -49,7 +51,8 @@ export default function ImageViewer(props) {
           zIndex: "5",
           top: "50%",
         }}
-      />
+      />:<div></div>}
+
     </div>
   );
 }

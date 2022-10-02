@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import styles from "../styles/map.module.css";
 import StopIcon from "@mui/icons-material/Stop";
+import styles from "../styles/map.module.css";
 
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
@@ -32,7 +32,7 @@ export default function AdventureNavBar(props) {
               // className={styles.PostAddIcon}
               sx={{ color: "rgb(222, 205, 170)", fontSize: 40 }}
             /></div>
-            to pause.
+            to end your journey.
           </div>
           </div>
         )}

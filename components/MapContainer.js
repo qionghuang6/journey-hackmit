@@ -309,7 +309,6 @@ function MapContainer(props) {
       ) : (
         <div />
       )}
-      <JourneySubmissionForm />
       <Map
         google={props.google}
         zoom={13}
@@ -317,6 +316,8 @@ function MapContainer(props) {
         initialCenter={userLocation}
         disableDefaultUI={true}
       >
+
+      <JourneySubmissionForm />
         <Dialog onClose={handleClose} open={openStory}>
           <Story props={openStory}></Story>
         </Dialog>

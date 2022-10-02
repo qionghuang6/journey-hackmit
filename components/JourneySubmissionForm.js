@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Box, Typography, Grid, TextField } from "@mui/material";
+
+import styles from "../styles/map.module.css";
 import ImageViewer from "./ImageViewer";
 
 export default function JourneySubmissionForm(props) {
@@ -27,10 +29,14 @@ export default function JourneySubmissionForm(props) {
   };
 
   return (
-    <Box sx={{ position: "absolute", width: "100%", height: 200 }}>
-      <h4>First, let's upload any pictures of your journey</h4>
-      <ImageViewer props={images} />
-      <input type="file" name="file" onChange={handleImageSubmit} />
-    </Box>
+    <div className={styles.Journey}>
+      <div className={styles.JourneyBox}>
+      <div>First, let's upload any pictures of your journey
+      </div>
+      <div><input type="file" name="file" onChange={handleImageSubmit} /></div>
+
+      <div><ImageViewer props={images} /></div>
+    </div>
+    </div>
   );
 }
