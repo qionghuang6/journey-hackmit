@@ -1,8 +1,19 @@
 import { useState, useEffect } from 'react';
-import { Box, Typography, Grid } from '@mui/material';
+import { Box, Typography, Grid, TextField} from '@mui/material';
 import Experience from './Experience';
 import Journey from './Journey'
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import StarIcon from '@mui/icons-material/Star';
+import StarOutlineIcon from '@mui/icons-material/StarOutline';
+
+const ExperienceJourneyGroup = ({eStyle, jStyle}) => {
+  return (
+    <Box sx={{position: 'relative', width: '100%', height: 200}}>
+      <img src="experience.jpeg" style={{cursor: 'pointer', position: 'absolute', zIndex: '1', objectFit: 'contain', top: '0%', width: '70%', height: 'same-as-width', borderRadius: '16px', ...eStyle,}}/>
+      <img src="journey.jpeg" style={{cursor: 'pointer', position: 'absolute', objectFit: 'contain', margin: 'auto', top: '25%', left: '60%', width: '60%', height: 'same-as-width', borderRadius: '16px', ...jStyle}}/>
+    </Box>
+  )
+}
 
 export default function Adventure() {
   const profileImgUrl = '/phil.jpeg'
@@ -10,14 +21,36 @@ export default function Adventure() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log('hi')
       setLiked(!liked)
     }, 2000)
     return () => clearInterval(interval)
   }, [liked])
 
+  const name = 'Adventure Name Here'
+  const timestamp = new Date('2021-09-01T04:23:00')
+  const likeCount = 6293
+  const caption = `this place was lowkey kinda mid. i used my boosted board to get here and i just got soup.`
+  const stars = 3
+
+  const handleLikeClick = () => {
+    setLiked(!liked)
+  }
+
+  const handleOpenProfile = () => {
+    //TODO
+  }
+
+  let starIcons = []
+  for (let i = 0; i < 5; i++) {
+    if (i < stars) {
+      starIcons.push(<StarIcon sx={{color: 'gold', width: '40px', height: '35px'}}/>)
+    } else {
+      starIcons.push(<StarOutlineIcon sx={{color: 'black', width: '40px', height: '35px'}}/>)
+    }
+  }
+
   return (
-    <Box sx={{ maxWidth: 'sm', marginY: '16px', border: 2, borderColor: 'black', borderRadius: '16px', overflow: 'hidden' }}>
+    <Box sx={{ background: '#f5f5f5', maxWidth: 'sm', marginY: '16px', border: 2, borderColor: 'black', borderRadius: '16px', overflow: 'hidden' }}>
       <Box paddingX={2} paddingY={1}>
         <Grid container
           justifyContent="space-between"
@@ -26,36 +59,60 @@ export default function Adventure() {
             <Box>
               <Grid container spacing={1}>
                 <Grid item>
-                  <img src={profileImgUrl} style={{ borderRadius: '50%', width: '56px', height: '56px' }}></img>
+                  <img
+                    onClick={handleOpenProfile}
+                    src={profileImgUrl}
+                    style={{ borderRadius: '50%', width: '56px', height: '56px', objectFit: 'cover', cursor: 'pointer'}}>  
+                  </img>
                 </Grid>
                 <Grid item>
                  <Typography variant="h5" color="text.secondary" align="center">
-                    Adventure Name Here
+                    {name}
                   </Typography>
                   <Typography variant="body" color="text.secondary" align="center">
-                    12:30pm
+                    {timestamp.toLocaleString()}
                   </Typography>
                 </Grid>
               </Grid>
             </Box>
           </Grid>
           <Grid item>
-            <Box padding={1} sx={{ border: liked ? '2px solid #FF6161' : '2px solid gray', alignItems: 'center', margin: 'auto', backgroundColor: 'lightgray', borderRadius: '24px', height: '48px' }}>
+            <Box onClick={handleLikeClick}
+              padding={1}
+              sx={{ border: liked ? '2px solid #FF6161' : '2px solid gray', alignItems: 'center', margin: 'auto', backgroundColor: 'lightgray', borderRadius: '24px', height: '48px', cursor: 'pointer'}}>
               <Grid container spacing={1}>
                 <Grid item>
                 <FavoriteIcon sx={{ color: liked ? '#FF6161' : '#BEA0A0'}}/>
                 </Grid>
                 <Grid item>
-                <Typography>{liked ? 6294 : 6293 }</Typography>
+                <Typography>{`${liked ? likeCount + 1 : likeCount }`}</Typography>
                 </Grid>
               </Grid>
             </Box>
           </Grid>
         </Grid>
       </Box>
-      <Experience />
-      <Journey />
-      <Experience />
+      <Box margin={1} padding={1}>
+        <Grid container spacing={1}>
+          <Grid item xs={6}>
+            <ExperienceJourneyGroup />
+          </Grid>
+          <Grid item xs={6}>
+            <ExperienceJourneyGroup />
+          </Grid>
+          <Grid item xs={6}>
+            <ExperienceJourneyGroup eStyle={{top: '25%'}} jStyle={{top: '40%'}}/>
+          </Grid>
+          <Grid item xs={6}>
+            <Experience style={{zIndex: '2'}}/>
+          </Grid>
+        </Grid>
+      </Box>
+      <Box marginX={4} marginTop={-1} marginBottom={1}>
+        <Typography align="center">{caption}</Typography>
+        <Typography align="center">{starIcons}</Typography>
+      </Box>
+      <TextField id="outlined-basic" label="Comment" variant="outlined" sx={{width: '100%', padding: 1}}/>
     </Box>
   );
 }
